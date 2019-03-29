@@ -30,9 +30,8 @@ Neuron::Neuron(neuron input) {
     sigmoid_activation = input.sigmoid_activation;
     binary_activation = input.binary_activation;
 
-
-    feed_weights = input.feed_weights;
-    link_weights = input.link_weights;
+    memcpy(&feed_weights, &input.feed_weights, sizeof(feed_weights));
+    memcpy(&link_weights, &input.link_weights, sizeof(link_weights));
 
     stimulus = input.stimulus;
 }
@@ -73,6 +72,7 @@ float Neuron::calculate(void){
     // multiplies and sums two arrays
     feed_sum = 0;
     link_sum = 0;
+
     for (size_t y = 0; y < 3; ++y)
     {
         for (size_t x = 0; x < 3; ++x)
@@ -91,5 +91,15 @@ float Neuron::calculate(void){
 
     binary_activation = (internal_activation > threshold);
     sigmoid_activation = 1/(1 + exp(step * (internal_activation - threshold)));
+    return sigmoid_activation;
+}
+
+bool Neuron::get_output_bool(void)
+{
+    return binary_activation;
+}
+
+float Neuron::get_output_sig(void)
+{
     return sigmoid_activation;
 }
