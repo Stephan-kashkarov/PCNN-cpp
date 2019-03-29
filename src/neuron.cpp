@@ -29,16 +29,15 @@ Neuron::Neuron(neuron input) {
     binary_activation = input.binary_activation;
 
 
-    feed_weights = *input.feed_weights;
-    link_weights = *input.link_weights;
+    feed_weights = **input.feed_weights;
+    link_weights = **input.link_weights;
 }
 
 void Neuron::populate(float **layer, size_t rows, size_t cols)
 {
-
     for (int8_t y = i - 1; y < i + 1; ++y)
     {
-
+        // ensure no segfaults
         if (y >= rows)
         {
             --y;
@@ -49,7 +48,7 @@ void Neuron::populate(float **layer, size_t rows, size_t cols)
 
         for (int8_t x = j - 1; x < j + 1; ++x)
         {
-
+            // ensure no segfaults
             if (x >= cols)
             {
                 --x;
@@ -59,10 +58,18 @@ void Neuron::populate(float **layer, size_t rows, size_t cols)
                 ++x;
             }
 
+            // update value
             inputs[y - i][x - j] = layer[y][x];
+        }
+    }
+}
+
+float Neuron::calculate(void){
+    for (size_t y = 0; y < 3; ++y)
+    {
+        for (size_t x = 0; x < 3; ++x)
+        {
 
         }
-
     }
-
 }
