@@ -1,18 +1,20 @@
-#include <stdio.h>
 #include <vector>
 #include <cstdint>
+#include <cstring>
+#include <bits/stdc++.h>
 
 #include <headers/neuron.h>
 
+using namespace std;
 using namespace PCNN;
 
 Neuron::Neuron(neuron input) {
     i = input.i;
     j = input.j;
 
-    feed_decay = input.feed_decay;
-    link_decay = input.link_decay;
-    thre_decay = input.thre_decay;
+    feed_decay = exp(-input.feed_decay);
+    link_decay = exp(-input.link_decay);
+    thre_decay = exp(-input.thre_decay);
 
     feed_amp = input.feed_amp;
     link_amp = input.link_amp;
@@ -29,8 +31,10 @@ Neuron::Neuron(neuron input) {
     binary_activation = input.binary_activation;
 
 
-    feed_weights = **input.feed_weights;
-    link_weights = **input.link_weights;
+    feed_weights = input.feed_weights;
+    link_weights = input.link_weights;
+
+    stimulus = input.stimulus;
 }
 
 void Neuron::populate(float **layer, size_t rows, size_t cols)
@@ -65,11 +69,27 @@ void Neuron::populate(float **layer, size_t rows, size_t cols)
 }
 
 float Neuron::calculate(void){
+    
+    // multiplies and sums two arrays
+    feed_sum = 0;
+    link_sum = 0;
     for (size_t y = 0; y < 3; ++y)
     {
         for (size_t x = 0; x < 3; ++x)
         {
-
+            feed_sum += inputs[y][x] * feed_weights[y][x];
+            link_sum += inputs[y][x] * link_weights[y][x];
         }
     }
+
+    feed = (feed_decay * feed) + (feed_amp * feed_sum) + stimulus;
+    link = (link_decay * link) + (link_amp * link_sum);
+
+    internal_activation = feed + (1 + (bias * link));
+
+    threshold = (thre_decay * threshold) + (thre_amp * binary_activation);
+
+    binary_activation = (internal_activation > threshold);
+    sigmoid_activation = 1/(1 + exp(step * (internal_activation - threshold)));
+    return sigmoid_activation;
 }

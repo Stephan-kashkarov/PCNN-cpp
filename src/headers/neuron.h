@@ -16,13 +16,12 @@ namespace PCNN {
         float feed_decay;
         float link_decay;
         float thre_decay;
-
         float feed_amp;
         float link_amp;
         float thre_amp;
-
         uint8_t step;
         uint8_t bias;
+        float stimulus;
 
         // Main internal variables
         float feed;                // F
@@ -35,6 +34,8 @@ namespace PCNN {
         // matricies
         float feed_weights[3][3];
         float link_weights[3][3];
+
+        
     };
     
 
@@ -50,13 +51,12 @@ namespace PCNN {
             float feed_decay;
             float link_decay;
             float thre_decay;
-
             float feed_amp;
             float link_amp;
             float thre_amp;
-
             uint8_t step;
             uint8_t bias;
+            float stimulus;
 
             // Main internal variables
             float feed;                // F
@@ -69,10 +69,13 @@ namespace PCNN {
             // matricies
             float feed_weights[3][3];
             float link_weights[3][3];
-
             float inputs[3][3];
 
-        public:
+            // Misc
+            int link_sum;
+            int feed_sum;
+
+          public:
 
             // Functuons
             Neuron(neuron);
