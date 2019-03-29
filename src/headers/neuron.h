@@ -75,7 +75,7 @@ namespace PCNN {
             int link_sum;
             int feed_sum;
 
-          public:
+        public:
 
             // Functuons
             Neuron(neuron);
