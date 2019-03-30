@@ -14,8 +14,8 @@ namespace PCNN {
         layer* prev;
 
         // Size defenition
-        int16_t size_x;
-        int16_t size_y;
+        size_t size_x;
+        size_t size_y;
 
         // outputs
         float** output;
@@ -25,7 +25,7 @@ namespace PCNN {
         Neuron** neurons;
 
     };
-    float** get_inputs(layer*);
+    float **get_inputs(layer, size_t&, size_t&);
     void update_layer(layer*);
 
 }
