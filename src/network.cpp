@@ -1,24 +1,19 @@
-#include <headers/neuron.h>
-#include <headers/network.h>
+#include "neuron.h"
+#include "network.h"
 #include <cstring>
 
 using namespace std;
 using namespace PCNN;
 
-float** get_inputs(layer row, size_t& y, size_t& x)
+vector<float_matrix> PCNN::update_layer(layer *row, vector<float_matrix> &inputs, size_t y, size_t x)
 {
-    return row.prev->output;
-}
-
-void update_layer(layer* row)
-{
-    size_t y;
-    size_t x;
-
-    float** inputs = get_inputs(*row, &y, &x);
-
     // Shifts row pos
-    memcpy(row->prev, row->output, sizeof(&row->output));
+    for (uint i = 0; i < row->output.size(); ++i)
+    {
+        float_matrix& src = row->output[i];
+        float_matrix& dest = row->prevoutput[i];
+        copy(src.begin(), src.end(), dest.begin());
+    }
 
     for (size_t k = 0; k < y; ++k)
     {
@@ -28,4 +23,9 @@ void update_layer(layer* row)
             row->output[k][l] = row->neurons[k][l].calculate();
         }
     }
+    if (!(row->next))
+    {
+        return row->output;
+    }
+    return update_layer(row->next, row->output, row->size_y, row->size_y);
 }

@@ -2,8 +2,12 @@
 #include <stdio.h>
 #include <vector>
 #include <cstdint>
+#include <array>
+#include "neuron.h"
 
 using namespace std;
+
+typedef array<float, 3> float_array;
 
 namespace PCNN {
 
@@ -32,8 +36,8 @@ namespace PCNN {
         bool binary_activation;    // Y
 
         // matricies
-        float feed_weights[3][3];
-        float link_weights[3][3];
+        array<float_array, 3> feed_weights;
+        array<float_array, 3> link_weights;
 
         
     };
@@ -67,9 +71,9 @@ namespace PCNN {
             bool binary_activation;    // Y
 
             // matricies
-            float feed_weights[3][3];
-            float link_weights[3][3];
-            float inputs[3][3];
+            array<float_array, 3> feed_weights;
+            array<float_array, 3> link_weights;
+            array<float_array, 3> inputs;
 
             // Misc
             int link_sum;
@@ -79,7 +83,7 @@ namespace PCNN {
 
             // Functuons
             Neuron(neuron);
-            void populate(float **layer, size_t rows, size_t cols);
+            void populate(vector<float_matrix>layer, size_t rows, size_t cols);
             float calculate(void);
             bool get_output_bool(void);
             float get_output_sig(void);

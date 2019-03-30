@@ -3,7 +3,8 @@
 #include <cstring>
 #include <bits/stdc++.h>
 
-#include <headers/neuron.h>
+#include "neuron.h"
+#include "network.h"
 
 using namespace std;
 using namespace PCNN;
@@ -36,9 +37,9 @@ Neuron::Neuron(neuron input) {
     stimulus = input.stimulus;
 }
 
-void Neuron::populate(float **layer, size_t rows, size_t cols)
+void Neuron::populate(vector<float_matrix> layer, size_t rows, size_t cols)
 {
-    for (int8_t y = i - 1; y < i + 1; ++y)
+    for (size_t y = i - 1; y < i + 1; ++y)
     {
         // ensure no segfaults
         if (y >= rows)
@@ -49,7 +50,7 @@ void Neuron::populate(float **layer, size_t rows, size_t cols)
             ++y;
         }
 
-        for (int8_t x = j - 1; x < j + 1; ++x)
+        for (size_t x = j - 1; x < j + 1; ++x)
         {
             // ensure no segfaults
             if (x >= cols)
