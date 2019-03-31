@@ -94,13 +94,3 @@ float Neuron::calculate(void){
     sigmoid_activation = 1/(1 + exp(step * (internal_activation - threshold)));
     return sigmoid_activation;
 }
-
-bool Neuron::get_output_bool(void)
-{
-    return binary_activation;
-}
-
-float Neuron::get_output_sig(void)
-{
-    return sigmoid_activation;
-}
