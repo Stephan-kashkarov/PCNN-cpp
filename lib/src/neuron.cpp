@@ -69,11 +69,11 @@ void Neuron::populate(vector<float_matrix> layer, size_t rows, size_t cols)
 }
 
 float Neuron::calculate(void){
-    
     // multiplies and sums two arrays
     feed_sum = 0;
     link_sum = 0;
 
+    // iterates through both weight arrays and sums
     for (size_t y = 0; y < 3; ++y)
     {
         for (size_t x = 0; x < 3; ++x)
@@ -83,14 +83,17 @@ float Neuron::calculate(void){
         }
     }
 
+    // Receptor
     feed = (feed_decay * feed) + (feed_amp * feed_sum) + stimulus;
     link = (link_decay * link) + (link_amp * link_sum);
 
+    // Linking
     internal_activation = feed + (1 + (bias * link));
 
+    // Pulse
     threshold = (thre_decay * threshold) + (thre_amp * binary_activation);
-
     binary_activation = (internal_activation > threshold);
     sigmoid_activation = 1/(1 + exp(step * (internal_activation - threshold)));
+
     return sigmoid_activation;
 }

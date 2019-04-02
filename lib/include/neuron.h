@@ -47,9 +47,9 @@ namespace PCNN {
 
         private:
             // matricies
-            array<float_array, 3> feed_weights;
-            array<float_array, 3> link_weights;
-            array<float_array, 3> inputs;
+            array<float_array, 3> feed_weights; // 2D 3x3 array of floats
+            array<float_array, 3> link_weights; // 2D 3x3 array of floats
+            array<float_array, 3> inputs;       // 2D 3x3 array of floats
 
             // Main internal variables
             float feed;                // F
