@@ -17,7 +17,7 @@ lib/bin/neuron.o: lib/include/neuron.h
 run:
 	make clean
 	make pcnn
-	./pcnn.out
+	./pcnn.out -c data/test.csv
 
 clean:
 	rm $(LIBS)

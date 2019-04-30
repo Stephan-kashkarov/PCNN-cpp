@@ -49,9 +49,11 @@ namespace CSV{
 
     vector<vector<float_matrix>> read_csv(const char* filepath)
     {
+        cout << "Hello2" << endl;
         vector<vector<float_matrix>> out;
         fstream fptr;
         fptr.open(filepath, ios::in);
+        cout << "Hello3" << endl;
         vector<char> row;
         string temp, img;
         while(fptr >> temp)
@@ -69,11 +71,13 @@ namespace CSV{
                 }
                 if (img[i + 1] == ',' || img[i + 1] == '"')
                 {
-                    temp.clear();
+                    cout << "Hello4" << endl;
+                    temp.erase();
+                    cout << "Hello5" << endl;
                     memcpy(&temp, &img[j], i);
-                    memcpy(&j, &i, sizeof(i));
+                    memcpy(&j, &i, sizeof(j));
                     out.push_back(read_img(temp));
-                    temp.clear();
+                    cout << "Hello6" << endl;
                 }
             }
         }

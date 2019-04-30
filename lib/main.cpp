@@ -26,37 +26,43 @@ int main(int argc, const char *argv[])
     bool input_provided = false;
 
     size_t i = 0;
-    cout << argc << endl;
-    while (i <= argc)
+    
+
+    if (argc > 1)
     {
-        if (argv[i][0] == '-')
+        while (i < argc)
         {
-            if (argv[i][1] == 'j')
+            if (argv[i][0] == '-')
             {
-                input_provided = true;
-                input = read_csv(argv[i + 1]);
-            }
-            else if (argv[i][1] == 'l')
-            {
-                layers = strtol(argv[i + 1], NULL, 10);
-            }
-            else if (argv[i][1] == 'h')
-            {
-                cout << "Options:\n '-j' -> Json filepath\n '-l' -> num of layers excluding root\n '-h' -> this text" << endl;
-                return 0;
-            }
-            else if (argv[i][1] == '-')
-            {
-                size_t j = -1;
-                while (argv[i+1])
+                if (argv[i][1] == 'c')
                 {
-                    break;
+                    input_provided = true;
+                    cout << "Hello1" << endl;
+                    input = read_csv(argv[++i]);
+                    cout << "Input: " << input[0][0][0] << endl;
+                }
+                else if (argv[i][1] == 'l')
+                {
+                    layers = strtol(argv[++i], NULL, 10);
+                }
+                else if (argv[i][1] == 'h')
+                {
+                    cout << "Options:\n '-c' -> csv filepath\n '-l' -> num of layers excluding root\n '-h' -> this text" << endl;
+                    return 0;
+                }
+                else if (argv[i][1] == '-')
+                {
+                    size_t j = -1;
+                    while (argv[++i])
+                    {
+                        break;
+                    }
                 }
             }
+            ++i;
         }
-        ++i;
     }
-
+    
     if (!(input_provided) || argc <= 1)
     {
         cout << "Please provide input. To see options run `./pcnn -h`" << endl;
