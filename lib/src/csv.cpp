@@ -23,9 +23,11 @@ namespace CSV{
             {
                 continue;
             }
-
-            val = strtof(&temp[j], (temp[j] + i));
+            temp = "";
+            val = strtof(temp, (char**)(&temp + sizeof(temp)));
+            out.push_back(val);
         }
+        return out;
     }
 
     vector<float_matrix> read_img(string &img)
@@ -48,11 +50,11 @@ namespace CSV{
 
     vector<vector<float_matrix>> read_csv(const char* filepath)
     {
+        vector<vector<float_matrix>> out;
         fstream fptr;
         fptr.open(filepath, ios::in);
         vector<char> row;
         string temp, img;
-        vector<float_matrix> out;
         while(fptr >> temp)
         {
             row.clear();
