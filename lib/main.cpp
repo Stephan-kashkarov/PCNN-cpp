@@ -3,12 +3,14 @@
 
 #include "network.h"
 #include "neuron.h"
+#include "csv.h"
 
 using namespace std;
 using namespace PCNN;
+using namespace CSV;
 
 bool input_provided = false;
-vector<float_matrix> input;
+vector<vector<float_matrix>> input;
 layer root;
 long layers;
 
@@ -28,7 +30,7 @@ int main(int argc, const char *argv[])
             if (argv[i][1] == 'j')
             {
                 input_provided = true;
-                input = get_json(argv[i + 1]);
+                input = read_csv(argv[i + 1]);
             }
             else if (argv[i][1] == 'l')
             {
