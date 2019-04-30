@@ -1,9 +1,7 @@
 #pragma once
-#include <stdio.h>
 #include <vector>
 #include <cstdint>
 #include <array>
-#include "neuron.h"
 
 using namespace std;
 

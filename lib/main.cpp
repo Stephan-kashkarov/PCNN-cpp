@@ -10,12 +10,8 @@ using namespace PCNN;
 bool input_provided = false;
 vector<float_matrix> input;
 layer root;
-long cols;
+long layers;
 
-vector<float_matrix> get_json(const char* filepath)
-{
-
-}
 
 layer* gen_layer(vector<float_matrix>& inputs, bool base)
 {
@@ -24,23 +20,33 @@ layer* gen_layer(vector<float_matrix>& inputs, bool base)
 
 int main(int argc, const char *argv[])
 {
-    
-
-    for (size_t i = 1; i < argc; i += 2)
+    size_t i = -1;
+    while (++i <= argc)
     {
-        if (argv[i] == "-j")
+        if (argv[i][0] == '-')
         {
-            input_provided = true;
-            input = get_json(argv[i+1]);
-        }
-        else if (argv[i] == "-c")
-        {
-            cols = strtol(argv[i+1], NULL, 10);
-        }
-        else if (argv[i] == "-h")
-        {
-            cout << "Options:\n'-j' ~ Json filepath\n'-c' ~ num of cols excluding root\n '-h' ~ this text" << endl;
-            return 0;
+            if (argv[i][1] == 'j')
+            {
+                input_provided = true;
+                input = get_json(argv[i + 1]);
+            }
+            else if (argv[i][1] == 'l')
+            {
+                layers = strtol(argv[i + 1], NULL, 10);
+            }
+            else if (argv[i][1] == 'h')
+            {
+                cout << "Options:\n '-j' -> Json filepath\n '-l' -> num of layers excluding root\n '-h' -> this text" << endl;
+                return 0;
+            }
+            else if (argv[i][1] == '-')
+            {
+                size_t j = -1;
+                while (argv[i+1])
+                {
+                    break;
+                }
+            }
         }
     }
 
