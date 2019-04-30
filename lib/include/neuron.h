@@ -6,6 +6,7 @@
 using namespace std;
 
 typedef array<float, 3> float_array;
+typedef vector<float> float_matrix;
 
 namespace PCNN {
 

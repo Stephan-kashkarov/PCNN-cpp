@@ -1,12 +1,10 @@
 #pragma once
-#include "neuron.h"
-#include "network.h"
+#include "../include/neuron.h"
 #include <vector>
 
 using namespace std;
 
 typedef vector<PCNN::Neuron> neuron_matrix;
-typedef vector<float> float_matrix;
 
 namespace PCNN {
 

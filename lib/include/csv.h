@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <cstring>
 #include <string>
-#include "network.h"
+#include "neuron.h"
 
 using namespace std;
 using namespace PCNN;

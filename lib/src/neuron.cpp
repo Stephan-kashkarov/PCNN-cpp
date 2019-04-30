@@ -3,8 +3,7 @@
 #include <cstring>
 #include <bits/stdc++.h>
 
-#include "neuron.h"
-#include "network.h"
+#include "../include/network.h"
 
 using namespace std;
 using namespace PCNN;

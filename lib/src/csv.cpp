@@ -5,10 +5,9 @@
 #include <cstring>
 #include <string>
 
-#include "csv.h"
-#include "neuron.h"
-#include "network.h"
-
+#include "../include/csv.h"
+#include "../include/neuron.h"
+#include "../include/network.h"
 
 namespace CSV{
 

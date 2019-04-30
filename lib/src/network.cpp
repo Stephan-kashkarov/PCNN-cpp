@@ -1,6 +1,7 @@
-#include "neuron.h"
-#include "network.h"
 #include <cstring>
+
+#include "../include/neuron.h"
+#include "../include/network.h"
 
 using namespace std;
 using namespace PCNN;

@@ -1,18 +1,16 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "network.h"
-#include "neuron.h"
-#include "csv.h"
+#include "include/neuron.h"
+#include "include/network.h"
+#include "include/csv.h"
 
 using namespace std;
 using namespace PCNN;
 using namespace CSV;
 
-bool input_provided = false;
-vector<vector<float_matrix>> input;
-layer root;
-long layers;
+
+
 
 
 layer* gen_layer(vector<float_matrix>& inputs, bool base)
@@ -22,8 +20,14 @@ layer* gen_layer(vector<float_matrix>& inputs, bool base)
 
 int main(int argc, const char *argv[])
 {
-    size_t i = -1;
-    while (++i <= argc)
+    vector<vector<float_matrix>> input;
+    layer root;
+    long layers;
+    bool input_provided = false;
+
+    size_t i = 0;
+    cout << argc << endl;
+    while (i <= argc)
     {
         if (argv[i][0] == '-')
         {
@@ -50,9 +54,10 @@ int main(int argc, const char *argv[])
                 }
             }
         }
+        ++i;
     }
 
-    if (!(input_provided))
+    if (!(input_provided) || argc <= 1)
     {
         cout << "Please provide input. To see options run `./pcnn -h`" << endl;
         return 0;
