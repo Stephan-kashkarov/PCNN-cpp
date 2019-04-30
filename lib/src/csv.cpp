@@ -47,7 +47,7 @@ namespace CSV{
         return out;
     }
 
-    vector<vector<float_matrix>> read_csv(const char* filepath)
+    vector<vector<float_matrix>> read_csv(char* filepath)
     {
         cout << "Hello2" << endl;
         vector<vector<float_matrix>> out;

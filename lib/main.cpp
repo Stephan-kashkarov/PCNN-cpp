@@ -18,8 +18,13 @@ layer* gen_layer(vector<float_matrix>& inputs, bool base)
 
 }
 
-int main(int argc, const char *argv[])
+int main(int argc, char* argv[])
 {
+    cout << "Arguments: " << argc << endl;
+    for (size_t i=0; i < argc; ++i)
+    {
+        cout << "Arg: " << argv[i] << endl;
+    }
     vector<vector<float_matrix>> input;
     layer root;
     long layers;
@@ -38,12 +43,12 @@ int main(int argc, const char *argv[])
                 {
                     input_provided = true;
                     cout << "Hello1" << endl;
-                    input = read_csv(argv[++i]);
+                    input = read_csv(argv[i]);
                     cout << "Input: " << input[0][0][0] << endl;
                 }
                 else if (argv[i][1] == 'l')
                 {
-                    layers = strtol(argv[++i], NULL, 10);
+                    layers = strtol(argv[i], NULL, 10);
                 }
                 else if (argv[i][1] == 'h')
                 {

@@ -13,7 +13,7 @@ using namespace PCNN;
 namespace CSV {
     // TODO: vector<string> read_title(const char* row);
     float_matrix read_col(string &col);
-    vector<float_matrix> read_img(const char *row);
-    vector<vector<float_matrix>> read_csv(const char *filepath);
+    vector<float_matrix> read_img(string &img);
+    vector<vector<float_matrix>> read_csv(char *filepath);
 }
 
