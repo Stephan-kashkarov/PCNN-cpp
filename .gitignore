@@ -31,5 +31,6 @@
 *.out
 *.app
 
-# VScode stuff
-.vscode/*
+#vscode Stuff
+.vscode/ipch/
+.vscode/ipch/*

@@ -56,9 +56,11 @@ namespace CSV{
         cout << "Hello3" << endl;
         vector<char> row;
         string temp, img;
+        cout << filepath << endl;
         while(fptr >> temp)
         {
             row.clear();
+            cout << "Hello4" << endl;
             getline(fptr, img);
             size_t j = 0;
             for (size_t i = 0; i < img.size(); ++i)
@@ -71,13 +73,13 @@ namespace CSV{
                 }
                 if (img[i + 1] == ',' || img[i + 1] == '"')
                 {
-                    cout << "Hello4" << endl;
-                    temp.erase();
                     cout << "Hello5" << endl;
+                    temp.erase();
+                    cout << "Hello6" << endl;
                     memcpy(&temp, &img[j], i);
                     memcpy(&j, &i, sizeof(j));
                     out.push_back(read_img(temp));
-                    cout << "Hello6" << endl;
+                    cout << "Hello7" << endl;
                 }
             }
         }
