@@ -14,18 +14,25 @@ namespace CSV
 
     float_matrix read_col(string &col)
     {
+        cout << "Greetings1" << endl;
         float_matrix out;
-        char* temp;
+        char* col_val;
+        strcpy(col_val, col.c_str());
+        char* str_val;
         float val;
         size_t j = 0;
-        for (size_t i = 0; i< col.size(); ++i){
-            
+        for (size_t i = 0; i < col.size(); ++i)
+        {
+            cout << "Greetings2" << endl;
             while (col[i] != ',')
             {
                 continue;
             }
-            temp = "";
-            val = strtof(temp, (char**)(&temp + sizeof(temp)));
+            for (int k = j; k < i; ++k)
+            {
+                str_val;
+            }
+            val = strtof(str_val, (char**)(&str_val + sizeof(str_val)));
             out.push_back(val);
         }
         return out;
@@ -33,18 +40,28 @@ namespace CSV
 
     vector<float_matrix> read_img(string &img)
     {
+        cout << "Welcome1" << endl;
+        cout << "imgsize: " << img.size() << endl;
         vector<float_matrix> out;
         size_t j = 0;
         string val;
+        cout << "Welcome2" << endl;
         for (size_t i = 0; i < img.size(); ++i)
         {
-            if (img[i + 1] == ',')
+            if (img[i] == ',')
             {
-                val = "";
-                memcpy(&val, &img[j], i);
+                cout << "Welcome3" << endl;
+                val.clear();
+                for (int k = j; k < i; ++k)
+                {
+                    cout << "pushing " << img[k] << endl;
+                    val.push_back(img[k]);
+                }
                 memcpy(&i, &j, sizeof(i));
+                cout << "Welcome4" << endl;
                 out.push_back(read_col(val));
             }
+            // cout << "Welcome4" << endl;
         }
         return out;
     }
@@ -55,39 +72,47 @@ namespace CSV
         cout << sizeof(filepath) << endl;
         cout << "Hello2" << endl;
         vector<vector<float_matrix>> out;
-        fstream fptr;
-        fptr.open(filepath, ios::in);
         vector<char> row;
         string temp, img;
+        size_t j;
+
+        fstream fptr;
+        fptr.open(filepath, ios::in);
+
         cout << "Hello3" << endl;
-        do
+
+        while(fptr >> temp)
         {
+            j = 0;
             cout << "Hello4" << endl;
+
             row.clear();
+
             cout << "Hello4.1" << endl;
+
             getline(fptr, img);
+
             cout << "img: " << img << ", temp: " << temp << endl;
-            size_t j = 0;
+
             for (size_t i = 0; i < img.size(); ++i)
             {
                 cout << "Image " << i << ": " << img[i] << endl;
                 if (img[i] == '"')
                 {
-                    cout << "A" << endl;
                     j++;
-                    do{
+                    while (true)
+                    {
                         ++i;
                         cout << "Skipping: " << img[i] << endl;
                         if (img[i] == '"')
                         {
                             break;
                         }
-                    } while (true);
+                    }
                     i--;
                 }
                 if (img[i + 1] == ',' || img[i + 1] == '"')
                 {
-                    cout << "B" << endl;
                     cout << "Hello5" << endl;
                     temp.erase(); // seg fault second time round
                     cout << "Hello6" << endl;
@@ -102,7 +127,7 @@ namespace CSV
                     cout << "Hello7" << endl;
                 }
             }
-        } while(fptr >> temp);
+        }
         cout << "While over" << endl;
         return out;
     }
