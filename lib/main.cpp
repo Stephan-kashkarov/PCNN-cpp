@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     }
     vector<vector<float_matrix>> input;
     layer root;
-    long layers;
+    long layers = 0;
     bool input_provided = false;
 
     size_t i = 0;
@@ -43,12 +43,14 @@ int main(int argc, char* argv[])
                 {
                     input_provided = true;
                     cout << "Hello1" << endl;
-                    input = read_csv(argv[i]);
-                    cout << "Input: " << input[0][0][0] << endl;
+                    input = read_csv(argv[++i]);
+                    cout << "exited read_csv" << endl;
+                    cout << "Input: ";
+                    cout << sizeof(input[0][0][0]) << endl;
                 }
                 else if (argv[i][1] == 'l')
                 {
-                    layers = strtol(argv[i], NULL, 10);
+                    layers = strtol(argv[++i], NULL, 10);
                 }
                 else if (argv[i][1] == 'h')
                 {
@@ -72,5 +74,10 @@ int main(int argc, char* argv[])
     {
         cout << "Please provide input. To see options run `./pcnn -h`" << endl;
         return 0;
+    }
+    else
+    {
+        cout << "Creating PCNN with " << layers << " extra layers" << endl;
+        cout << "Input looks like: " << input[0][0][0] << endl;
     }
 }

@@ -9,9 +9,11 @@
 #include "../include/neuron.h"
 #include "../include/network.h"
 
-namespace CSV{
+namespace CSV
+{
 
-    float_matrix read_col(string &col){
+    float_matrix read_col(string &col)
+    {
         float_matrix out;
         char* temp;
         float val;
@@ -49,40 +51,59 @@ namespace CSV{
 
     vector<vector<float_matrix>> read_csv(char* filepath)
     {
+        // cout << filepath << endl;
+        cout << sizeof(filepath) << endl;
         cout << "Hello2" << endl;
         vector<vector<float_matrix>> out;
         fstream fptr;
         fptr.open(filepath, ios::in);
-        cout << "Hello3" << endl;
         vector<char> row;
         string temp, img;
-        cout << filepath << endl;
-        while(fptr >> temp)
+        cout << "Hello3" << endl;
+        do
         {
-            row.clear();
             cout << "Hello4" << endl;
+            row.clear();
+            cout << "Hello4.1" << endl;
             getline(fptr, img);
+            cout << "img: " << img << ", temp: " << temp << endl;
             size_t j = 0;
             for (size_t i = 0; i < img.size(); ++i)
             {
+                cout << "Image " << i << ": " << img[i] << endl;
                 if (img[i] == '"')
                 {
+                    cout << "A" << endl;
                     j++;
-                    while (img[i++] != '"');
+                    do{
+                        ++i;
+                        cout << "Skipping: " << img[i] << endl;
+                        if (img[i] == '"')
+                        {
+                            break;
+                        }
+                    } while (true);
                     i--;
                 }
                 if (img[i + 1] == ',' || img[i + 1] == '"')
                 {
+                    cout << "B" << endl;
                     cout << "Hello5" << endl;
-                    temp.erase();
+                    temp.erase(); // seg fault second time round
                     cout << "Hello6" << endl;
-                    memcpy(&temp, &img[j], i);
+                    for (int k = j; k <= i; ++k)
+                    {
+                        cout << "pushing!" << img[k] << endl;
+                        temp.push_back(img[k]);
+                    }
                     memcpy(&j, &i, sizeof(j));
+                    cout << "value: " << img << endl;
                     out.push_back(read_img(temp));
                     cout << "Hello7" << endl;
                 }
             }
-        }
+        } while(fptr >> temp);
+        cout << "While over" << endl;
         return out;
     }
 
