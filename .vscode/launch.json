@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/pcnn.out",
-            "args": ["-c data/test.csv"],
+            "args": ["-c", "data/test.csv"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
